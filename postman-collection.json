@@ -1,0 +1,241 @@
+{
+  "info": {
+    "name": "Contract Management Platform API",
+    "description": "Postman collection for Contract Management Platform API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Blueprints",
+      "item": [
+        {
+          "name": "List Blueprints",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/blueprints",
+              "host": ["{{baseUrl}}"],
+              "path": ["blueprints"]
+            }
+          }
+        },
+        {
+          "name": "Get Blueprint",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/blueprints/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["blueprints", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Blueprint",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Employment Contract\",\n  \"description\": \"Standard employment agreement\",\n  \"fields\": [\n    {\n      \"type\": \"TEXT\",\n      \"label\": \"Employee Name\",\n      \"positionX\": 0,\n      \"positionY\": 0,\n      \"required\": true\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/blueprints",
+              "host": ["{{baseUrl}}"],
+              "path": ["blueprints"]
+            }
+          }
+        },
+        {
+          "name": "Delete Blueprint",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/blueprints/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["blueprints", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contracts",
+      "item": [
+        {
+          "name": "List Contracts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/contracts?status=CREATED",
+              "host": ["{{baseUrl}}"],
+              "path": ["contracts"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "CREATED",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Contract",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/contracts/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["contracts", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Contract",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Employment Contract - John Doe\",\n  \"blueprintId\": \"\",\n  \"fields\": {\n    \"field-id\": \"John Doe\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/contracts",
+              "host": ["{{baseUrl}}"],
+              "path": ["contracts"]
+            }
+          }
+        },
+        {
+          "name": "Update Contract",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fields\": {\n    \"field-id\": \"Updated Value\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/contracts/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["contracts", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Transition Contract Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"APPROVED\",\n  \"reason\": \"Approved by manager\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/contracts/:id/transition",
+              "host": ["{{baseUrl}}"],
+              "path": ["contracts", ":id", "transition"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Contract Status History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/contracts/:id/history",
+              "host": ["{{baseUrl}}"],
+              "path": ["contracts", ":id", "history"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Utilities",
+      "item": [
+        {
+          "name": "Seed Database",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/seed",
+              "host": ["{{baseUrl}}"],
+              "path": ["seed"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api"
+    }
+  ]
+}

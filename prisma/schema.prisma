@@ -42,11 +42,37 @@ model Contract {
   blueprint   Blueprint @relation(fields: [blueprintId], references: [id])
   status      String   @default("CREATED") // CREATED, APPROVED, SENT, SIGNED, LOCKED, REVOKED
   fields      ContractField[]
+  statusHistory ContractStatusHistory[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   @@index([blueprintId])
   @@index([status])
+}
+
+model ContractStatusHistory {
+  id         String   @id @default(cuid())
+  contractId String
+  contract   Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  fromStatus String?
+  toStatus   String
+  changedBy  String?  // User ID or name
+  reason     String?
+  createdAt  DateTime @default(now())
+
+  @@index([contractId])
+  @@index([createdAt])
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  role      String   @default("VIEWER") // VIEWER, APPROVER, SIGNER, ADMIN
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([role])
 }
 
 model ContractField {

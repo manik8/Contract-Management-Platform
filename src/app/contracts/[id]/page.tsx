@@ -11,6 +11,7 @@ import {
   ContractStatus,
 } from '@/lib/contract-lifecycle'
 import { StatusChangeDropdown } from '@/components/status-change-dropdown'
+import { StatusTimeline } from '@/components/status-timeline'
 
 export default function ContractDetailPage({
   params,
@@ -180,6 +181,11 @@ export default function ContractDetailPage({
           )}
         </CardContent>
       </Card>
+
+      <StatusTimeline
+        contractId={contract.id}
+        currentStatus={contract.status as ContractStatus}
+      />
     </div>
   )
 }

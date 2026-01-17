@@ -507,18 +507,57 @@ Use the status filter dropdown on the dashboard to view:
 
 6. **No Soft Deletes**: Blueprints are hard-deleted. In production, soft deletes would preserve data integrity.
 
+## Optional Enhancements (Implemented ✅)
+
+### ✅ API Documentation
+- **Swagger/OpenAPI**: Available at `/api-docs` route
+- **Postman Collection**: `postman-collection.json` included in the repository
+- View API documentation in browser or import Postman collection
+
+### ✅ Role-based Actions
+- **User Roles**: VIEWER, APPROVER, SIGNER, ADMIN
+- **Permission System**: Role-based access control for contract actions
+- **Status Transitions**: Enforced by role permissions
+  - APPROVER: Can approve, revoke, and send contracts
+  - SIGNER: Can sign and lock contracts
+  - ADMIN: Full access to all actions
+- See `src/lib/roles.ts` for permission definitions
+
+### ✅ Status Timeline View
+- **Status History**: All status changes are tracked in `ContractStatusHistory` table
+- **Timeline Component**: Visual timeline showing all status transitions
+- **History API**: `GET /api/contracts/[id]/history` endpoint
+- View timeline on contract detail page
+
+### ✅ Unit/Integration Tests
+- **Jest Setup**: Configured with Next.js testing utilities
+- **Test Coverage**: 
+  - Contract lifecycle logic tests
+  - Role-based permission tests
+  - API integration test structure
+- Run tests: `npm test`
+- Watch mode: `npm run test:watch`
+- Coverage: `npm run test:coverage`
+
+### ✅ Docker Setup
+- **Dockerfile**: Production-ready Docker image
+- **Docker Compose**: Development and production configurations
+- **Commands**:
+  ```bash
+  # Build and run production
+  docker-compose up
+  
+  # Development mode
+  docker-compose --profile dev up dev
+  ```
+
 ## Future Enhancements
 
-- **API Documentation**: Swagger/OpenAPI documentation
-- **Role-based Actions**: Different permissions for approvers vs signers
-- **Status Timeline View**: Visual timeline of contract status changes
-- **Unit/Integration Tests**: Comprehensive test coverage
-- **Docker Setup**: Containerized deployment
 - **File Upload**: Support for document attachments
 - **Email Notifications**: Notify stakeholders on status changes
 - **Search Functionality**: Full-text search for contracts
 - **Export**: PDF generation for contracts
-- **Audit Log**: Track all changes to contracts
+- **Real Authentication**: Replace mock user system with actual auth
 
 ## Development Commands
 
